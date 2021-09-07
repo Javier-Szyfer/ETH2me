@@ -4,13 +4,10 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   corePlugins: {
     // ...
-    appearance: false,
   },
   theme: {
     extend: {},
   },
-  variants: {
-    extend: {},
-  },
+  variants: {},
   plugins: [],
 };
