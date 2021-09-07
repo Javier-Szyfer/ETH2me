@@ -16,9 +16,10 @@ const createTransaction = async ({
   console.log(ether, addr);
 
   try {
-    if (!window.ethereum)
+    if (!window.ethereum) {
+      setLoading(false);
       throw new Error("No crypto wallet found. Please install it.");
-
+    }
     await window.ethereum.send("eth_requestAccounts");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -102,7 +103,7 @@ export default function Home({ data }) {
                 value={ether}
                 style={{ webkitAppearance: "none" }}
                 className="mt-2 mb-2 appearance-none border border-green-600 bg-green-100 rounded-xl w-full py-2 px-3 text-green-600 leading-tight focus:outline-none foucs:appearance-none 
-                active:appearance-none hover:appearance-none selected:appearance-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                active:appearance-none hover:appearance-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                 onChange={(e) => {
                   setError(""), setEther(e.target.value);
                 }}
