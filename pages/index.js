@@ -33,18 +33,23 @@ const createTransaction = async ({
     setEther("");
     console.log("success");
   } catch (err) {
+    setLoading(false);
     setError(err.message);
   }
 };
 
 export default function Home({ data }) {
-  const currentETHPriceInUSD = data.market_data.current_price.usd;
-  const [ether, setEther] = useState("");
+  //State
+  const [ether, setEther] = useState("0.01");
   const [txs, setTxs] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const addr = "0xC0cc6807941Df9381Ac22F0272AAE10E01423d5e";
 
+  //fetching from https://www.coingecko.com/
+  const currentETHPriceInUSD = data.market_data.current_price.usd;
+  //enter the address in which you want to receive ETH
+  const addr = "0xC0cc6807941Df9381Ac22F0272AAE10E01423d5e";
+  //helper function
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -53,7 +58,7 @@ export default function Home({ data }) {
   const handleSubmitPayment = async (e) => {
     e.preventDefault();
     setError("");
-    if (!ether) {
+    if (!ether || ether == "0") {
       setError("Please enter an amount");
       return;
     }
@@ -74,47 +79,61 @@ export default function Home({ data }) {
         <title>ETH2me</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <navbar className="p-4 bg-green-100 flex w-full justify-between items-center">
+      <nav className="p-4 bg-green-100 flex w-full xs:flex-col justify-between items-center">
         <div className="px-4 py-1 border border-green-600  rounded-lg">
           <p className="text-green-600 font-bold text-sm ">
             ETH &rarr; {formatter.format(currentETHPriceInUSD)}
           </p>
         </div>
+
         <NextLink href="https://github.com/Javier-Szyfer/ETH2me">
           <div className="px-4 py-1 flex items-center">
-            <p className="text-green-600 font-medium text-sm mr-2 cursor-pointer">
+            <p className="text-green-600 font-medium text-sm mr-2 cursor-pointer hidden sm:block">
               Find the code{" "}
             </p>
             <GrGithub className="w-6 h-6 fill-current text-green-600 cursor-pointer" />
           </div>
         </NextLink>
-      </navbar>
-      <main className="flex flex-col flex-1 items-center justify-center w-full bg-green-100 h-full ">
-        <div className="max-w-md mx-auto  border border-green-600 rounded-xl shadow-xl overflow-hidden flex flex-col items-center justify-center text-center px-8 py-10 ">
-          <h1 className="text-4xl font-bold text-green-600">ETH2me</h1>
+      </nav>
 
+      <main className="flex flex-col flex-1 items-center justify-center w-full bg-green-100 h-full ">
+        <div className="max-w-xs mx-auto  border border-green-600 rounded-xl shadow-2xl overflow-hidden flex flex-col  justify-center text-center px-6 py-8 ">
           <form onSubmit={handleSubmitPayment}>
-            <div className="flex flex-wrap  flex-col items-center justify-around max-w-4xl mt-6 sm:w-full ">
-              <label className="block text-green-600 text-sm font-medium ">
-                Amount in ETH
-              </label>
-              <input
-                type="number"
-                step="any"
-                value={ether}
-                className="mt-2 mb-2 appearance-none border border-green-600 bg-green-100 rounded-xl w-full py-2 px-3 text-green-600 leading-tight focus:outline-none foucs:appearance-none 
-                active:appearance-none hover:appearance-none focus:ring-2 focus:ring-green-600 focus:border-green-600"
-                onChange={(e) => {
-                  setError(""), setEther(e.target.value);
-                }}
-              />
-              <p className="text-xs text-green-700 font-medium mb-4">
-                {ether ? formatter.format(ether * currentETHPriceInUSD) : ""}
+            <div className="flex flex-wrap flex-col justify-around  mt-2 ">
+              <p className="block text-green-600 text-lg font-medium text-left tracking-tight max-w-screen-xs  ">
+                If you like my work, <br /> please consider sending me a tip
               </p>
+              <div className="flex flex-row flex-initial  max-w-xs  mt-4 mb-4 items-center justify-center">
+                <input
+                  type="number"
+                  step="any"
+                  value={ether}
+                  className=" text-right text-2xl font-bold mr-2 appearance-none border border-green-600 bg-green-100 rounded-xl w-full py-2 px-3 text-green-600 leading-tight focus:outline-none foucs:appearance-none 
+                active:appearance-none hover:appearance-none focus:ring-1 focus:ring-green-600 focus:border-green-600"
+                  onChange={(e) => {
+                    setError(""), setEther(e.target.value);
+                  }}
+                />
+                <div className="text-green-600 text-4xl font-medium tracking-tight">
+                  ETH
+                </div>
+              </div>
+              <div className="flex flex-row flex-initial  max-w-xs   mb-4 items-center justify-center">
+                <p className="text-sm text-green-600 font-medium mr-2 ">
+                  {ether && "USD"}
+                </p>
+                <p className="text-sm text-green-600 font-medium ">
+                  {ether ? formatter.format(ether * currentETHPriceInUSD) : ""}
+                </p>
+              </div>
               <button
                 type="submit"
-                disabled={loading}
-                className="py-2 px-6 bg-green-600 text-green-100 rounded-full text-md font-bold hover:bg-green-700 hover:text-white"
+                disabled={loading ? true : false}
+                className={`${
+                  loading && "cursor-not-allowed disabled:opacity-50"
+                }
+                py-2 px-6  bg-green-600 text-green-100
+                 rounded-xl text-md font-bold hover:bg-green-700 active:bg-green-700 hover:text-white`}
               >
                 Transfer
               </button>

@@ -1,21 +1,21 @@
 # ETH2me
 
-Small Gist to recieve ETH donations on your website.
+Simple app to showcase a portal to recieve ETH donations on your website.
 
-This example uses [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js.
+Used [ethers.js](https://docs.ethers.io/v5/) for interacting with Ethereum serving as a provider.
+
+User will need to have the [Metamask](https://metamask.io/download) browser extension installed
+
+You will need to enter your own address to receive funds.
+
+It's fetching the current ETH price in realtime from [CoinGecko](https://www.coingecko.com/) 's API.
+
+Feel free to use and modify it to suit your needs 🐸
 
 ## Preview
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+You can see the final result [here](https://eth2me.vercel.app/)
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+This example uses [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js.
 
 Deployed into the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
