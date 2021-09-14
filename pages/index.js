@@ -13,8 +13,6 @@ const createTransaction = async ({
   ether,
   addr,
 }) => {
-  console.log(ether, addr);
-
   try {
     if (!window.ethereum) {
       setLoading(false);
