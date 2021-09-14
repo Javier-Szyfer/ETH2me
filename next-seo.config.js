@@ -1,5 +1,5 @@
 const title = "ETH2me – Receive ETH on your site";
-const description = "ETH2me is a small for accepting donations in Ether";
+const description = "ETH2me is a small widget for accepting donations in Ether";
 
 const SEO = {
   title,
