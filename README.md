@@ -1,6 +1,6 @@
 # ETH2me
 
-Simple app to showcase a portal to recieve ETH donations on your website.
+Simple app to showcase a widget to recieve ETH donations on your website.
 
 Used [ethers.js](https://docs.ethers.io/v5/) for interacting with Ethereum serving as a provider.
 
